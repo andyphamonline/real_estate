@@ -1,0 +1,15 @@
+* { margin:0; padding:0; box-sizing:border-box; }
+
+.clearfix:after { 
+	content: "."; 
+	visibility: hidden; 
+	display: block; 
+	height: 0; 
+	clear: both;
+}
+
+body {
+	background: url("../images/house_2000.jpeg");
+	font-size: 12px;
+	text-align: center;
+}

@@ -1,0 +1,30 @@
+{
+  "name": "real_estate",
+  "version": "1.0.0",
+  "description": "###Property model logic if (zillowID exists in property model) { \tif (user_id = null) { \t\tpropertyValue = propertyValue \t\tshow in Results \t} \telse (user_id = a number) { \t\tpropertyValue = user zillowPropertyValue \t\texclude in Resuls \t} } else (zillowId doesn't exists in property model) { \tshow in Results \tpropertyValue = zillowPropertyValue }",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/theking9985/real_estate.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/theking9985/real_estate/issues"
+  },
+  "homepage": "https://github.com/theking9985/real_estate#readme",
+  "dependencies": {
+    "bcrypt": "^0.8.5",
+    "body-parser": "^1.14.1",
+    "ejs": "^2.3.4",
+    "express": "^4.13.3",
+    "express-ejs-layouts": "^2.0.0",
+    "express-jwt": "^3.3.0",
+    "jsonwebtoken": "^5.4.1",
+    "mongoose": "^4.3.1",
+    "request": "^2.67.0"
+  }
+}

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="RealEstateApp">
+<head>
+	<base href="/">
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, height=device-height initial-scale=1.0"/>
+	<title>Real Estate Game</title>
+  	<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" />
+	<link rel="stylesheet" media="screen" href="https://netdna.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="app/css/style.css">
+
+	
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.0-beta.2/angular.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.0-beta.2/angular-route.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.8/angular-resource.js"></script>
+	<script src="app/services.js"></script>
+	<script src="app/controllers.js"></script>
+	<script src="app/app.js"></script>	
+	
+</head>
+<body>
+	<div ng-include="'app/views/navbar.html'"></div>
+	<ng-view></ng-view>
+</body>
+</html>

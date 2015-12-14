@@ -31,13 +31,6 @@ app.use(function (err, req, res, next) {
 
 app.use('/api/users', require('./controllers/users'));
 
-// app.get("/", function(req, res) {
-// 	User.find({}, function(err, users) {
-// 		if (err) res.send(err);
-// 		res.send(users);
-// 	})
-// });
-
 app.post('/api/auth', function(req, res) {
   User.findOne({email: req.body.email}, function(err, user) {
     if (err || !user) return res.send({message: 'User not found'});

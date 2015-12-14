@@ -13,7 +13,6 @@ angular.module("RealEstateCtrls", ["RealEstateServices"])
 			$scope.userAction = function() {
 				$http.post("/api/auth", $scope.user).then(function success(res) {
 					Auth.saveToken(res.data.token);
-					console.log(res.data.token);
 					$location.path("/users/:id") //redirects to the root path
 				}, function error(res) {
 					console.log(res.data);

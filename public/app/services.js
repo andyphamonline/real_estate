@@ -17,7 +17,6 @@ angular.module("RealEstateServices", ["ngResource"])
 			},
 			isLoggedin: function() {
 				var token = this.getToken();
-				console.log(token);
 				return token ? true : false;
 			}
 		}
@@ -29,6 +28,7 @@ angular.module("RealEstateServices", ["ngResource"])
 				if (token) {
 					config.headers.Authorization = "Bearer" + token;
 				}
-				return config;			}
+				return config;			
+			}
 		}
 	}])

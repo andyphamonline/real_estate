@@ -15,8 +15,7 @@ app.config(["$routeProvider", "$locationProvider", function($routeProvider, $loc
 		controller: "UserCtrl"
 	})
 	.when("/results", {
-		templateUrl: "app/views/results.html",
-		controller: "ResultsCtrl"
+		templateUrl: "app/views/results.html"
 	})
 	.when("/results/:id", {
 		templateUrl: "app/views/resultsShow.html"
@@ -37,6 +36,4 @@ app.config(["$routeProvider", "$locationProvider", function($routeProvider, $loc
 	$rootScope.isLoggedIn = function() {
     	return Auth.isLoggedin.apply(Auth);
 	}
-	$rootScope.searchResults = {};
-
 }]);

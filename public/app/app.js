@@ -11,7 +11,8 @@ app.config(["$routeProvider", "$locationProvider", function($routeProvider, $loc
 		controller: "SignupCtrl"
 	})
 	.when("/users/:id", {
-		templateUrl: "app/views/user.html"
+		templateUrl: "app/views/user.html",
+		controller: "UserCtrl"
 	})
 	.when("/results", {
 		templateUrl: "app/views/results.html"

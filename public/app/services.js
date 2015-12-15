@@ -1,13 +1,18 @@
 var TOKEN_STORAGE = "secret-token"
 
 angular.module("RealEstateServices", ["ngResource"])
-	.factory("RealEstateFactory", ["$resource", function($resource) {
-		return $resource("http://localhost:3000/api/properties/:id")
+	.factory("PropertyFactory", ["$resource", function($resource) {
+		return $resource("http://localhost:3000/api/search");
+	}])
+	.factory("UserFactory", ["$resource", function($resource) {
+		return $resource("http://localhost:3000/api/users/:id");
 	}])
 	.factory("Auth", ["$window", function($window) {
 		return {			
-			saveToken: function(token) {
+			saveToken: function(token, user) {
 				$window.localStorage[TOKEN_STORAGE] = token;
+				$window.localStorage["user.id"] = user.id;
+				// console.log(user.id);
 			},
 			getToken: function() {
 				return $window.localStorage[TOKEN_STORAGE];

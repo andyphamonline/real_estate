@@ -90,8 +90,8 @@ app.post('/api/auth', function(req, res) {
 // 						console.log(error);
 // 					}
 // 					var data = result["Comps:comps"].response[0].properties[0].comparables[0].comp;
-// 				    // res.render("index", {data:data});
-//             res.send(result);
+// 				  // res.render("index", {data:data});
+//           res.send(data);
 // 				});				
 // 			}
 // 		}

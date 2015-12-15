@@ -41,7 +41,8 @@ angular.module("RealEstateCtrls", ["RealEstateServices"])
 			$scope.user = {
 				name: "",
 				email: "",
-				password: ""
+				password: "",
+				cash: 1000000
 			};
 			$scope.userAction = function() {
 				$http.post("/api/users", $scope.user).then(function success(res) {
@@ -60,8 +61,9 @@ angular.module("RealEstateCtrls", ["RealEstateServices"])
 		"Auth",
 		"$http",
 		"$location", 
-		"PropertyFactory", 
-		function($scope, Auth, $http, $location, PropertyFactory) {
+		"PropertyFactory",
+		"$rootScope",
+		function($scope, Auth, $http, $location, PropertyFactory, $rootScope) {
 		$scope.logout = function() {
 			Auth.removeToken();
 			$location.path("/");
@@ -79,21 +81,17 @@ angular.module("RealEstateCtrls", ["RealEstateServices"])
 				params: {address: x, citystatezip: y}
 			})
 			.then(function success(res) {
-				$scope.results = res;
-				console.log($scope.results);
-				$location.path("/")
+				$rootScope.searchResults = res;
+				$location.path("/results")
 			}, function error(res) {
 				console.log(res.data);
 			})
-
-
-
-			// $http.get("/api/search/", {params: {"address": address, "citystatezip": city}})
-			// .then(function success(res) {
-			// 	console.log(res);
-			// 	$location.path("/results")
-			// }, function error(res) {
-			// 	console.log(res.data);
-			// })
 		}
+	}])
+	.controller("ResultsCtrl", [
+		"$scope",
+		"$rootScope",
+		function($scope, $rootScope) {
+			$scope.results = $rootScope.searchResults.data;
+			$rootScope.searchResults = {};
 	}])

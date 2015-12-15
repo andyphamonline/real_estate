@@ -1,2 +1,7 @@
 <h1>results.html</h1>
 <h1>Results</h1>
+
+<div class="well" ng-repeat="result in results">
+	<p>Address: {{result.address[0].street[0]}}, {{result.address[0].city[0]}}, {{result.address[0].state[0]}} {{result.address[0].zipcode[0]}}</p>
+	<p>Price: {{result.zestimate[0].amount[0]._}}</p>
+</div>

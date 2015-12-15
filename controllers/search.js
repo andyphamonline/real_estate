@@ -33,7 +33,7 @@ router.get("/", function(req, res) {
 	function fn2(data, callback) {
 		// console.log("*****************data at top of fn 2: ", data);
 		request(
-			'http://www.zillow.com/webservice/GetComps.htm?zws-id=' + process.env.ZILLOW_KEY + '&zpid=' + data + '&count=2',
+			'http://www.zillow.com/webservice/GetComps.htm?zws-id=' + process.env.ZILLOW_KEY + '&zpid=' + data + '&count=20',
 			function(error, response, body) {
 				if (!error && response.statusCode === 200) {				
 					var parseString = require('xml2js').parseString;

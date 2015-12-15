@@ -25,8 +25,7 @@ angular.module("RealEstateCtrls", ["RealEstateServices"])
 	.controller("UserCtrl", [
 		"$scope", "UserFactory", "$routeParams",
 		function($scope, UserFactory, $routeParams) {
-			UserFactory.get({id: $routeParams.id}, function(data) {
-				console.log(data);
+			UserFactory.get({id: $routeParams.id}, function(data) {				
 				$scope.user = data
 			}, function(data) {
 				console.log(data)
@@ -63,7 +62,9 @@ angular.module("RealEstateCtrls", ["RealEstateServices"])
 		"$location", 
 		"PropertyFactory",
 		"$rootScope",
-		function($scope, Auth, $http, $location, PropertyFactory, $rootScope) {
+		"$window",
+		function($scope, Auth, $http, $location, PropertyFactory, $rootScope, $window) {
+		$scope.name = $window.localStorage["user.name"];		
 		$scope.logout = function() {
 			Auth.removeToken();
 			$location.path("/");
@@ -82,7 +83,8 @@ angular.module("RealEstateCtrls", ["RealEstateServices"])
 			})
 			.then(function success(res) {
 				$rootScope.searchResults = res;
-				$location.path("/results")
+				$rootScope.$emit("search_update");
+				$location.path("/results");
 			}, function error(res) {
 				console.log(res.data);
 			})
@@ -93,5 +95,8 @@ angular.module("RealEstateCtrls", ["RealEstateServices"])
 		"$rootScope",
 		function($scope, $rootScope) {
 			$scope.results = $rootScope.searchResults.data;
-			$rootScope.searchResults = {};
+			$rootScope.$on("search_update", function() {
+				$scope.results = $rootScope.searchResults.data;
+			});
+			// $rootScope.searchResults = {};
 	}])

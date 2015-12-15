@@ -12,7 +12,8 @@ angular.module("RealEstateServices", ["ngResource"])
 			saveToken: function(token, user) {
 				$window.localStorage[TOKEN_STORAGE] = token;
 				$window.localStorage["user.id"] = user.id;
-				// console.log(user.id);
+				$window.localStorage["user.name"] = user.name;
+				console.log($window.localStorage["user.name"]);
 			},
 			getToken: function() {
 				return $window.localStorage[TOKEN_STORAGE];

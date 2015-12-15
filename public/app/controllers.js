@@ -79,8 +79,9 @@ angular.module("RealEstateCtrls", ["RealEstateServices"])
 				params: {address: x, citystatezip: y}
 			})
 			.then(function success(res) {
-				console.log(res);
-				$location.path("/results")
+				$scope.results = res;
+				console.log($scope.results);
+				$location.path("/")
 			}, function error(res) {
 				console.log(res.data);
 			})

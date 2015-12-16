@@ -95,13 +95,13 @@ angular.module("RealEstateCtrls", ["RealEstateServices"])
 		"$window",
 		"$location",
 		"PropertyFactory",
-		function($scope, $rootScope, $window, $location, PropertyFactory) {
+		"UserFactory",
+		function($scope, $rootScope, $window, $location, PropertyFactory, UserFactory) {
 			$scope.userId = $window.localStorage["user.id"];
 			$scope.results = $rootScope.searchResults.data;
 			$rootScope.$on("search_update", function() {
 				$scope.results = $rootScope.searchResults.data;
 			});
-			// $rootScope.searchResults = {};
 			
 			$scope.createProperty = function(result) {
 				$scope.property = {
@@ -118,12 +118,23 @@ angular.module("RealEstateCtrls", ["RealEstateServices"])
 					lastSoldPrice: result.lastSoldPrice[0]._,
 					user: $window.localStorage["user.id"]
 				};
-				PropertyFactory.save($scope.property, function success(data) {
-					$location.path("/properties/" +  data.id);
-					// console.log("****************** HELLO", data);
-				}, function error(data) {
-					console.log(data);
+				
+				// get user cash from DB
+				UserFactory.get({id: $window.localStorage["user.id"]}).$promise.then(function(result){
+					if (result.cash > $scope.property.price) {
+						result.cash = result.cash - $scope.property.price
+						UserFactory.update({id: $window.localStorage["user.id"]}, {cash: result.cash});	
+						PropertyFactory.save($scope.property, function success(data) {
+							$location.path("/properties/" +  data.id);
+						}, function error(data) {
+							console.log(data);
+				});					
+					}
+					else {
+						alert("You don't have enough money. Please search again!")
+					}
 				});
+
 			}
 	}])
 	.controller("PropertyCtrl", [
@@ -165,7 +176,6 @@ angular.module("RealEstateCtrls", ["RealEstateServices"])
 				{"good6": 3},
 				{"good7": 4},
 				{"good8": 5}
-
 			]
 
 			$scope.property = PropertyFactory.get({id: $routeParams.id});
@@ -175,12 +185,12 @@ angular.module("RealEstateCtrls", ["RealEstateServices"])
 				// console.log(index);
 				var singleEvent = eventArray[index];
 				for (key in singleEvent) {
-					console.log(key);
-					console.log(singleEvent[key]);					
+					// console.log(key);
+					// console.log(singleEvent[key]);					
 				}
-				console.log("outside for loop", key);
-				console.log("outside for loop", singleEvent[key]);
-				console.log("price origin: ", $scope.property.price);				
+				// console.log("outside for loop", key);
+				// console.log("outside for loop", singleEvent[key]);
+				// console.log("price origin: ", $scope.property.price);				
 				
 				if (index < 3) {
 					$scope.property.price = Math.round($scope.property.price - (($scope.property.price * singleEvent[key])/100));
@@ -195,23 +205,9 @@ angular.module("RealEstateCtrls", ["RealEstateServices"])
 					// $scope.property.$update();
 				}
 
-				console.log("price outside: ", $scope.property.price);
-
-				
 				PropertyFactory.update({id: $routeParams.id}, $scope.property)
 			}	
 	}])
-
-
-
-	// .controller("ResultShowCtrl", [
-	// 	"$scope",
-	// 	"$routeParams",
-	// 	function($scope,$routeParams) {
-	// 		console.log($routeParams.id);
-	// }])
-
-
 
 
 

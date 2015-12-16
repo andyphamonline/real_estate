@@ -21,8 +21,8 @@ angular.module("RealEstateCtrls", ["RealEstateServices"])
 			}
 	}])
 	.controller("UserCtrl", [
-		"$scope", "UserFactory", "$routeParams", "PropertyFactory",
-		function($scope, UserFactory, $routeParams, PropertyFactory) {
+		"$scope", "UserFactory", "$routeParams", "PropertyFactory", "UserProperty",
+		function($scope, UserFactory, $routeParams, PropertyFactory, UserProperty) {
 			UserFactory.get({id: $routeParams.id}, function(data) {				
 				$scope.user = data
 			}, function(data) {
@@ -31,7 +31,7 @@ angular.module("RealEstateCtrls", ["RealEstateServices"])
 
 			$scope.properties = [];
 
-			PropertyFactory.get({user: $routeParams.id }, function success(data) {
+			UserProperty.get({id: $routeParams.id}, function success(data) {
 				$scope.properties = data;
 			}, function error(data) {
 				console.log(data);

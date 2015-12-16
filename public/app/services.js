@@ -2,12 +2,20 @@ var TOKEN_STORAGE = "secret-token"
 
 angular.module("RealEstateServices", ["ngResource"])
 	.factory("PropertyFactory", ["$resource", function($resource) {
-		return $resource("http://localhost:3000/api/properties/:id", null, {'update': { method:'PUT'}});
+		return $resource("/api/properties/:id", null, {'update': { method:'PUT'}});
 	}])
-	// .factory
-	// 	$resource("/api/users/:")
+	.factory("UserProperty", ["$resource", function($resource) {
+		return $resource("/api/users/:id/properties", null,
+			{
+				get: {
+					method: "GET",
+					isArray:true
+				}
+			}
+		);		
+	}])
 	.factory("UserFactory", ["$resource", function($resource) {
-		return $resource("http://localhost:3000/api/users/:id", null, {"update": {method: "PUT"}});
+		return $resource("/api/users/:id", null, {"update": {method: "PUT"}});
 	}])
 	.factory("Auth", ["$window", function($window) {
 		return {			

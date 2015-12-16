@@ -1,5 +1,6 @@
 var express = require('express');
 var User = require('../models/user');
+var Property = require('../models/property');
 var router = express.Router();
 
 router.route('/')
@@ -29,11 +30,14 @@ router.route('/:id').get(function(req, res) {
   })
 });
 
-router.route("/:userId/properties/")
+router.route("/:id/properties/")
   .get(function(req, res) {
     User.findById(req.params.id, function(err, user) {
       if (err) return res.status(500).send(err);
-      res.send(user);
+      Property.find({user: user.id}, function(err, property) {
+        if (err) return res.status(500).send(err);
+        res.send(property);
+      })
     })
   })
 

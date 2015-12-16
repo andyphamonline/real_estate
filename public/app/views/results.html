@@ -1,6 +1,7 @@
 <h1>Results</h1>
 
 <div class="well" ng-repeat="result in results">
+		<p>zpid: {{result.zpid[0]}}
 		<p>Address: {{result.address[0].street[0]}}, {{result.address[0].city[0]}}, {{result.address[0].state[0]}} {{result.address[0].zipcode[0]}}</p>
 		<p>Price: <b>${{result.zestimate[0].amount[0]._}}</b></p>
 		<p>Year Built: {{result.yearBuilt[0]}}</p>
@@ -8,6 +9,6 @@
 		<p>Bedrooms: {{result.bedrooms[0]}}</p>
 		<p>Bathrooms: {{result.bathrooms[0]}}</p>
 		<p>Last sold price: ${{result.lastSoldPrice[0]._}}</p>
-	<button class="btn btn-danger" ng-click="">Buy this property</button>
+	<button class="btn btn-danger" ng-click="createProperty(result)">Buy this property</button>
 </div>
 

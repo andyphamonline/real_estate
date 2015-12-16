@@ -93,13 +93,38 @@ angular.module("RealEstateCtrls", ["RealEstateServices"])
 		"$scope",
 		"$rootScope",
 		"$window",
-		function($scope, $rootScope, $window) {
+		"$location",
+		"PropertyFactory",
+		function($scope, $rootScope, $window, $location, PropertyFactory) {
 			$scope.userId = $window.localStorage["user.id"];
 			$scope.results = $rootScope.searchResults.data;
 			$rootScope.$on("search_update", function() {
 				$scope.results = $rootScope.searchResults.data;
 			});
 			// $rootScope.searchResults = {};
+			
+			$scope.createProperty = function(result) {
+				$scope.property = {
+					zpid: result.zpid[0],
+					address: result.address[0].street[0],
+					city: result.address[0].city[0],
+					state: result.address[0].state[0],
+					zip: result.address[0].zipcode[0],
+					price: result.zestimate[0].amount[0]._,
+					yearBuilt: result.yearBuilt[0],
+					lotSize: result.lotSizeSqFt[0],
+					bedrooms: result.bedrooms[0],
+					bathrooms: result.bathrooms[0],
+					lastSoldPrice: result.lastSoldPrice[0]._,
+					user: $window.localStorage["user.id"]
+				};
+				PropertyFactory.save($scope.property, function success(data) {
+					$location.path("/properties/" +  data.id);
+					// console.log("****************** HELLO", data);
+				}, function error(data) {
+					console.log(data);
+				});
+			}
 	}])
 	.controller("PropertyCtrl", [
 		"$scope", 
@@ -131,6 +156,7 @@ angular.module("RealEstateCtrls", ["RealEstateServices"])
 			PropertyFactory.get({id: $routeParams.id}, function(data) {
 				console.log(data);
 				$scope.property = data;
+				console.log("************HELLO", data);
 			}, function(data) {
 				console.log(data);
 			}

@@ -18,7 +18,9 @@ router.get("/", function(req, res) {
 	          			if (error) {
 	            			console.log(error);
 	          			}
+	          			console.log(result);
 	          			data = result["SearchResults:searchresults"].response[0].results[0].result[0].zpid;
+
 	          			callback(null, data);
 	        		});       
 	      		}

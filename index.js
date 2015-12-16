@@ -24,7 +24,6 @@ app.use('/api/users', expressJWT({secret: secret})
 .unless({path: ['/api/users'], method: 'post'}));
 app.use("/api/search", expressJWT({secret: secret}));
 app.use("/api/properties", expressJWT({secret: secret}));
-// it won't let me login
 
 app.use(function (err, req, res, next) {
   if (err.name === 'UnauthorizedError') {

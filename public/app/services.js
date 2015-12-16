@@ -33,7 +33,7 @@ angular.module("RealEstateServices", ["ngResource"])
 			request: function(config) {
 				var token = Auth.getToken();
 				if (token) {
-					config.headers.Authorization = "Bearer" + token;
+					config.headers.Authorization = "Bearer " + token;
 				}
 				return config;			
 			}

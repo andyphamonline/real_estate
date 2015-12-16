@@ -208,7 +208,7 @@ angular.module("RealEstateCtrls", ["RealEstateServices"])
 					result.cash = result.cash + $scope.property.price;
 					UserFactory.update({id: $window.localStorage["user.id"]}, {cash: result.cash});								
 				});
-				
+
 				PropertyFactory.delete({id: $routeParams.id}, function success(data) {
 					$scope.properties.splice(propertyIdx, 1);
 					$location.path("/users/" + $window.localStorage["user.id"]);
@@ -216,10 +216,6 @@ angular.module("RealEstateCtrls", ["RealEstateServices"])
 					console.log(data);
 				});
 			}
-
-
-			
-
 	}])
 
 

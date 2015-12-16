@@ -18,7 +18,7 @@ app.use(bodyParser.urlencoded({extended:false}));
 app.set('view engine', 'ejs');
 
 var mongoose = require("mongoose");
-mongoose.connect("mongodb://localhost/real_estate");
+mongoose.connect(process.env.MONGOLAB_URI || "mongodb://localhost/real_estate");
 
 app.use('/api/users', expressJWT({secret: secret})
 .unless({path: ['/api/users'], method: 'post'}));

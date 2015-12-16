@@ -4,6 +4,8 @@ angular.module("RealEstateServices", ["ngResource"])
 	.factory("PropertyFactory", ["$resource", function($resource) {
 		return $resource("http://localhost:3000/api/properties/:id", null, {'update': { method:'PUT'}});
 	}])
+	// .factory
+	// 	$resource("/api/users/:")
 	.factory("UserFactory", ["$resource", function($resource) {
 		return $resource("http://localhost:3000/api/users/:id", null, {"update": {method: "PUT"}});
 	}])

@@ -31,7 +31,7 @@ angular.module("RealEstateCtrls", ["RealEstateServices"])
 
 			$scope.properties = [];
 
-			PropertyFactory.query(function success(data) {
+			PropertyFactory.get({user: $routeParams.id }, function success(data) {
 				$scope.properties = data;
 			}, function error(data) {
 				console.log(data);

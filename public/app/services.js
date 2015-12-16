@@ -12,14 +12,15 @@ angular.module("RealEstateServices", ["ngResource"])
 			saveToken: function(token, user) {
 				$window.localStorage[TOKEN_STORAGE] = token;
 				$window.localStorage["user.id"] = user.id;
-				$window.localStorage["user.name"] = user.name;
-				console.log($window.localStorage["user.name"]);
+				$window.localStorage["user.name"] = user.name;							
 			},
 			getToken: function() {
 				return $window.localStorage[TOKEN_STORAGE];
 			},
 			removeToken: function() {
 				$window.localStorage.removeItem(TOKEN_STORAGE);
+				$window.localStorage.removeItem(["user.id"]);
+				$window.localStorage.removeItem(["user.name"]);
 			},
 			isLoggedin: function() {
 				var token = this.getToken();

@@ -19,7 +19,8 @@ app.config(["$routeProvider", "$locationProvider", function($routeProvider, $loc
 		controller: "ResultsCtrl"
 	})
 	.when("/results/:id", {
-		templateUrl: "app/views/resultsShow.html"
+		templateUrl: "app/views/resultsShow.html",
+		controller: "ResultShowCtrl"
 	})
 	.when("/properties/:id", {
 		templateUrl: "app/views/propertiesShow.html"

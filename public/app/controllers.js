@@ -13,10 +13,8 @@ angular.module("RealEstateCtrls", ["RealEstateServices"])
 
 			$scope.userAction = function() {
 				$http.post("/api/auth", $scope.user).then(function success(res) {
-					Auth.saveToken(res.data.token, res.data.user);
-					// console.log("***** MainCtrl***");
-					// console.log($window.localStorage["user.id"]);
-					$location.path("/users/" + $window.localStorage["user.id"]) //redirects to the root path
+					Auth.saveToken(res.data.token, res.data.user);					
+					$location.path("/users/" + $window.localStorage["user.id"])
 				}, function error(res) {
 					console.log(res.data);
 				});
@@ -64,7 +62,8 @@ angular.module("RealEstateCtrls", ["RealEstateServices"])
 		"$rootScope",
 		"$window",
 		function($scope, Auth, $http, $location, PropertyFactory, $rootScope, $window) {
-		$scope.name = $window.localStorage["user.name"];		
+		$scope.name = $window.localStorage["user.name"];
+		$scope.userId = $window.localStorage["user.id"];
 		$scope.logout = function() {
 			Auth.removeToken();
 			$location.path("/");
@@ -93,10 +92,35 @@ angular.module("RealEstateCtrls", ["RealEstateServices"])
 	.controller("ResultsCtrl", [
 		"$scope",
 		"$rootScope",
-		function($scope, $rootScope) {
+		"$window",
+		function($scope, $rootScope, $window) {
+			$scope.userId = $window.localStorage["user.id"];
 			$scope.results = $rootScope.searchResults.data;
 			$rootScope.$on("search_update", function() {
 				$scope.results = $rootScope.searchResults.data;
 			});
 			// $rootScope.searchResults = {};
 	}])
+	// .controller("ResultShowCtrl", [
+	// 	"$scope",
+	// 	"$routeParams",
+	// 	function($scope,$routeParams) {
+	// 		console.log($routeParams.id);
+	// }])
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	

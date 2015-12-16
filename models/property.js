@@ -9,11 +9,11 @@ var PropertySchema = new mongoose.Schema({
 	lotSize: Number,
 	bedrooms: String,
 	bathrooms: String,
-	lastSoldPrice: Number
+	lastSoldPrice: Number,
 	user: [{type: mongoose.Schema.Types.ObjectId, ref: 'user'}]
 });
 
-UserShema.set("toJSON", {
+PropertySchema.set("toJSON", {
 	transform: function(doc, ret, options) {
 		var returnJson = {
 			id: ret._id,

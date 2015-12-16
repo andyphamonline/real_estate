@@ -101,6 +101,44 @@ angular.module("RealEstateCtrls", ["RealEstateServices"])
 			});
 			// $rootScope.searchResults = {};
 	}])
+	.controller("PropertyCtrl", [
+		"$scope", 
+		"PropertyFactory",
+		function($scope, PropertyFactory) {
+			$scope.properties = [];
+			console.log("outside $scope.properties", $scope.properties);
+
+			PropertyFactory.query(function success(data) {
+				$scope.properties = data;
+				console.log("************** inside $scope.properties", $scope.properties)
+			}, function error(data) {
+				console.log("************** error", data);
+			});
+
+			$scope.deleteProperty = function(id, propertyIdx) {
+				Property.delete({id: id}, function success(data) {
+					$scope.properties.splice(propertyIdx, 1);
+				}, function error(data) {
+					console.log("************** $error", data);
+				});
+			}
+	}])
+	.controller("PropertyShowCtrl", [
+		"$scope",
+		"PropertyFactory",
+		"$routeParams",
+		function($scope, PropertyFactory, $routeParams) {
+			PropertyFactory.get({id: $routeParams.id}, function(data) {
+				console.log(data);
+				$scope.property = data;
+			}, function(data) {
+				console.log(data);
+			}
+		)
+	}])
+
+
+
 	// .controller("ResultShowCtrl", [
 	// 	"$scope",
 	// 	"$routeParams",
@@ -123,4 +161,4 @@ angular.module("RealEstateCtrls", ["RealEstateServices"])
 
 
 
-	
+

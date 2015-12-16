@@ -2,7 +2,7 @@ var TOKEN_STORAGE = "secret-token"
 
 angular.module("RealEstateServices", ["ngResource"])
 	.factory("PropertyFactory", ["$resource", function($resource) {
-		return $resource("http://localhost:3000/api/search");
+		return $resource("http://localhost:3000/api/properties/:id");
 	}])
 	.factory("UserFactory", ["$resource", function($resource) {
 		return $resource("http://localhost:3000/api/users/:id");

@@ -22,8 +22,13 @@ app.config(["$routeProvider", "$locationProvider", function($routeProvider, $loc
 		templateUrl: "app/views/resultsShow.html",
 		controller: "ResultShowCtrl"
 	})
+	.when("/properties", {
+		templateUrl: "app/views/properties.html",
+		controller: "PropertyCtrl"
+	})
 	.when("/properties/:id", {
-		templateUrl: "app/views/propertiesShow.html"
+		templateUrl: "app/views/propertiesShow.html",
+		controller: "PropertyShowCtrl"
 	})
 	.otherwise({
 		templateUrl: "app/views/404.html"

@@ -20,7 +20,7 @@ app.set('view engine', 'ejs');
 var mongoose = require("mongoose");
 mongoose.connect("mongodb://localhost/real_estate");
 
-app.use("/api/properties", expressJWT({secret: secret}));
+// app.use("/api/properties", expressJWT({secret: secret}));
 // app.use("/api/search", expressJWT({secret: secret}));
 // // it won't let me login
 // app.use('/api/users', expressJWT({secret: secret})
@@ -32,7 +32,7 @@ app.use(function (err, req, res, next) {
   }
 });
 
-app.use("api/properties", require("./controllers/property"));
+app.use("/api/properties", require("./controllers/properties"));
 app.use('/api/users', require('./controllers/users'));
 app.use("/api/search", require("./controllers/search"));
 

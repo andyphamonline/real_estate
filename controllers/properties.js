@@ -10,7 +10,7 @@ router.route("/")
 		});
 	})
 	.post(function(req,res) {
-		Property.create(req.body, function(err, airplane) {
+		Property.create(req.body, function(err, property) {
 			if (err) return res.status(500).send(err);
 			res.send(property);
 		});
@@ -20,7 +20,7 @@ router.route("/:id")
 	.get(function(req, res) {
 		Property.findById(req.params.id, function(err, property) {
 			if (err) return res.status(500).send(err);
-			res.send({"message": "success"});
+			res.send(property);
 		});
 	})
 	.put(function(req, res) {

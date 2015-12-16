@@ -153,14 +153,53 @@ angular.module("RealEstateCtrls", ["RealEstateServices"])
 		"PropertyFactory",
 		"$routeParams",
 		function($scope, PropertyFactory, $routeParams) {
-			PropertyFactory.get({id: $routeParams.id}, function(data) {
-				console.log(data);
-				$scope.property = data;
-				console.log("************HELLO", data);
-			}, function(data) {
-				console.log(data);
-			}
-		)
+			eventArray = [
+				{"Carl moves to neighborhood": 5},
+				{"bad1": 3},
+				{"bad2": 4},
+				{"good1": 2},
+				{"good2": 4},
+				{"good3": 5},
+				{"good4": 6},
+				{"good5": 2},
+				{"good6": 3},
+				{"good7": 4},
+				{"good8": 5}
+
+			]
+
+			$scope.property = PropertyFactory.get({id: $routeParams.id});
+
+			$scope.createEvent = function() {
+				var index = Math.floor(Math.random()*10);
+				// console.log(index);
+				var singleEvent = eventArray[index];
+				for (key in singleEvent) {
+					console.log(key);
+					console.log(singleEvent[key]);					
+				}
+				console.log("outside for loop", key);
+				console.log("outside for loop", singleEvent[key]);
+				console.log("price origin: ", $scope.property.price);				
+				
+				if (index < 3) {
+					$scope.property.price = Math.round($scope.property.price - (($scope.property.price * singleEvent[key])/100));
+					console.log("price bad: ", $scope.property.price);
+					alert(key + " .Your house decreased by " + singleEvent[key] + "% .The new value of your house is: $" + $scope.property.price);
+					// $scope.property.$update();
+
+				}
+				else {
+					$scope.property.price = Math.round($scope.property.price + (($scope.property.price * singleEvent[key]/100)));
+					alert(key + " .Your house increased by " + singleEvent[key] + "% .The new value of your house is: $" + $scope.property.price);
+					// $scope.property.$update();
+				}
+
+				console.log("price outside: ", $scope.property.price);
+
+				
+				PropertyFactory.update({id: $routeParams.id}, $scope.property)
+			}	
 	}])
 
 

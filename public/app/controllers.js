@@ -21,13 +21,21 @@ angular.module("RealEstateCtrls", ["RealEstateServices"])
 			}
 	}])
 	.controller("UserCtrl", [
-		"$scope", "UserFactory", "$routeParams",
-		function($scope, UserFactory, $routeParams) {
+		"$scope", "UserFactory", "$routeParams", "PropertyFactory",
+		function($scope, UserFactory, $routeParams, PropertyFactory) {
 			UserFactory.get({id: $routeParams.id}, function(data) {				
 				$scope.user = data
 			}, function(data) {
 				console.log(data)
 			})
+
+			$scope.properties = [];
+
+			PropertyFactory.query(function success(data) {
+				$scope.properties = data;
+			}, function error(data) {
+				console.log(data);
+			});
 	}])
 	.controller("SignupCtrl", [
 		"$scope",

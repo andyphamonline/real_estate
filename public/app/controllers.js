@@ -128,7 +128,7 @@ angular.module("RealEstateCtrls", ["RealEstateServices"])
 							$location.path("/properties/" +  data.id);
 						}, function error(data) {
 							console.log(data);
-				});					
+						});					
 					}
 					else {
 						alert("You don't have enough money. Please search again!")
@@ -163,7 +163,10 @@ angular.module("RealEstateCtrls", ["RealEstateServices"])
 		"$scope",
 		"PropertyFactory",
 		"$routeParams",
-		function($scope, PropertyFactory, $routeParams) {
+		"UserFactory",
+		"$location",
+		"$window",
+		function($scope, PropertyFactory, $routeParams, UserFactory, $location, $window) {
 			eventArray = [
 				{"Carl moves to neighborhood": 5},
 				{"bad1": 3},
@@ -182,31 +185,41 @@ angular.module("RealEstateCtrls", ["RealEstateServices"])
 
 			$scope.createEvent = function() {
 				var index = Math.floor(Math.random()*10);
-				// console.log(index);
 				var singleEvent = eventArray[index];
 				for (key in singleEvent) {
-					// console.log(key);
-					// console.log(singleEvent[key]);					
-				}
-				// console.log("outside for loop", key);
-				// console.log("outside for loop", singleEvent[key]);
-				// console.log("price origin: ", $scope.property.price);				
-				
+				}								
 				if (index < 3) {
 					$scope.property.price = Math.round($scope.property.price - (($scope.property.price * singleEvent[key])/100));
 					console.log("price bad: ", $scope.property.price);
 					alert(key + " .Your house decreased by " + singleEvent[key] + "% .The new value of your house is: $" + $scope.property.price);
-					// $scope.property.$update();
-
 				}
 				else {
 					$scope.property.price = Math.round($scope.property.price + (($scope.property.price * singleEvent[key]/100)));
 					alert(key + " .Your house increased by " + singleEvent[key] + "% .The new value of your house is: $" + $scope.property.price);
-					// $scope.property.$update();
 				}
 
 				PropertyFactory.update({id: $routeParams.id}, $scope.property)
-			}	
+			}
+
+			$scope.properties = [];
+
+			$scope.deleteProperty = function(id, propertyIdx) {
+				UserFactory.get({id: $window.localStorage["user.id"]}).$promise.then(function(result){				
+					result.cash = result.cash + $scope.property.price;
+					UserFactory.update({id: $window.localStorage["user.id"]}, {cash: result.cash});								
+				});
+				
+				PropertyFactory.delete({id: $routeParams.id}, function success(data) {
+					$scope.properties.splice(propertyIdx, 1);
+					$location.path("/users/" + $window.localStorage["user.id"]);
+				}, function error(data) {
+					console.log(data);
+				});
+			}
+
+
+			
+
 	}])
 
 

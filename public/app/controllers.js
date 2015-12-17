@@ -7,7 +7,7 @@ angular.module("RealEstateCtrls", ["RealEstateServices", "flash"])
 		"$window",
 		"Flash",
 		"$rootScope",
-		function($scope, $http, $location, Auth, $window, Flash, $rootScope ) {
+		function($scope, $http, $location, Auth, $window, Flash, $rootScope) {
 			$scope.dangerAlert = function() {
 				Flash.create("danger", "Incorrect email or password");
 			}
@@ -18,13 +18,10 @@ angular.module("RealEstateCtrls", ["RealEstateServices", "flash"])
 
 			$scope.userAction = function() {
 				$http.post("/api/auth", $scope.user).then(function success(res) {
-					console.log(res.data.message);
 					if (res.data.user){
 						Auth.saveToken(res.data.token, res.data.user);
 						$rootScope.name = res.data.user.name;
-						$rootScope.userId = res.data.user.id;
-						console.log("res.data in MainCtrl: ", res.data);
-						console.log("res.data.user in MainCtrl: ", res.data.user);
+						$rootScope.userId = res.data.user.id;						
 						$location.path("/users/" + $window.localStorage["user.id"])						
 					}
 					else {
@@ -92,41 +89,50 @@ angular.module("RealEstateCtrls", ["RealEstateServices", "flash"])
 		"$location", 
 		"$rootScope",
 		"$window",
-		function($scope, Auth, $http, $location, $rootScope, $window) {
-		$scope.logout = function() {
-			Auth.removeToken();
-			$rootScope.user = null;
-			$location.path("/");
-		}
-		$scope.search = {
-			q: ""
-		}
-		$scope.searchAction = function(address, city) {
-			var x = address.replace(/\s/g, "+");
-			var y = city.replace(/\s/g, "+");
-			$http({
-				url: "api/search",
-				method: "GET",
-				params: {address: x, citystatezip: y}
-			})
-			.then(function success(res) {
-				$rootScope.searchResults = res;
-				$rootScope.$emit("search_update");
-				$location.path("/results");
-			}, function error(res) {
-				console.log(res.data);
-			})
-		}
-		if ( $rootScope.isLoggedIn() && $window.localStorage["user.name"] ){
-			$scope.name = $window.localStorage["user.name"];
-			$scope.userId = $window.localStorage["user.id"];
-		} else if ($rootScope.isLoggedIn()) {
-			$scope.name = $rootScope.user.name;
-			$scope.userId = $rootScope.user.id;
-			console.log($rootScope.user.name);
-		}
-		console.log("I am localStorage user.name: ", $window.localStorage["user.name"]);
-		console.log("I am $scope.name: ", $scope.name);
+		"Flash",
+		function($scope, Auth, $http, $location, $rootScope, $window, Flash) {
+			$scope.dangerAlert = function() {
+				Flash.create("danger", "No Search Match. Please use a different address");
+			}
+
+			$scope.logout = function() {
+				Auth.removeToken();
+				$rootScope.user = null;
+				$location.path("/");
+			}
+			$scope.search = {
+				q: ""
+			}
+			$scope.searchAction = function(address, city) {
+				var x = address.replace(/\s/g, "+");
+				var y = city.replace(/\s/g, "+");
+				$http({
+					url: "api/search",
+					method: "GET",
+					params: {address: x, citystatezip: y}
+				})
+				.then(function success(res) {
+					if (res.data.length === 0) {						
+						$scope.dangerAlert();						
+					}
+					else {						
+						$rootScope.searchResults = res;
+						$rootScope.$emit("search_update");
+						$location.path("/results");
+					}					
+				}, function error(res) {
+					console.log("res in error: ", res);
+				})
+			}
+
+			//check if $rootScope & login
+			if ( $rootScope.isLoggedIn() && $window.localStorage["user.name"] ) {
+				$scope.name = $window.localStorage["user.name"];
+				$scope.userId = $window.localStorage["user.id"];
+			} else if ($rootScope.isLoggedIn()) {
+				$scope.name = $rootScope.user.name;
+				$scope.userId = $rootScope.user.id;
+			}
 	}])
 	.controller("ResultsCtrl", [
 		"$scope",

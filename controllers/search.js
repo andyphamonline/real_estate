@@ -18,8 +18,14 @@ router.get("/", function(req, res) {
 	          			if (error) {
 	            			console.log(error);
 	          			}	          			
-	          			data = result['SearchResults:searchresults'].response[0].results[0].result[0].zpid;
-	          			callback(null, data);
+	          			if (!result['SearchResults:searchresults'].response) {	          			
+	          				data = null;
+	          				callback(null, data);	          				
+	          			}
+	          			else {
+		          			data = result['SearchResults:searchresults'].response[0].results[0].result[0].zpid;
+		          			callback(null, data);	          				
+	          			}
 	        		});       
 	      		}
 	    	}
@@ -38,16 +44,29 @@ router.get("/", function(req, res) {
 						if (error) {
 							console.log(error);
 						}
-						data = result["Comps:comps"].response[0].properties[0].comparables[0].comp;
-						callback(null, data);
+						if (!result["Comps:comps"].response) {	          				
+	          				data = null;
+	          				callback(null, data);	          				
+	          			}
+	          			else {
+		          			data = result["Comps:comps"].response[0].properties[0].comparables[0].comp;
+		          			callback(null, data);	          				
+	          			}
+						
 					});				
 				}
+				
 			}
 		)
 	}
 
 	async.waterfall([fn1, fn2], function(err, results) {
-		res.send(results);
+		if (results === null) {
+			res.send(err);
+		}
+		else {
+			res.send(results);
+		}
 	})
 });
 

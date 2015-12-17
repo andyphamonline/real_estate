@@ -7,9 +7,9 @@ angular.module("RealEstateCtrls", ["RealEstateServices", "flash"])
 		"$window",
 		"Flash",
 		function($scope, $http, $location, Auth, $window, Flash) {
-			$scope.dangerAlert = function() {
-				Flash.create("danger", "Incorrect email or password");
-			}
+			// $scope.dangerAlert = function() {
+			// 	Flash.create("danger", "Incorrect email or password");
+			// }
 			$scope.user = {
 				email: "",
 				password: ""
@@ -74,8 +74,6 @@ angular.module("RealEstateCtrls", ["RealEstateServices", "flash"])
 		"$rootScope",
 		"$window",
 		function($scope, Auth, $http, $location, PropertyFactory, $rootScope, $window) {
-		$scope.name = $window.localStorage["user.name"];
-		$scope.userId = $window.localStorage["user.id"];
 		$scope.logout = function() {
 			Auth.removeToken();
 			$location.path("/");
@@ -100,6 +98,8 @@ angular.module("RealEstateCtrls", ["RealEstateServices", "flash"])
 				console.log(res.data);
 			})
 		}
+		$scope.name = $window.localStorage["user.name"];
+		$scope.userId = $window.localStorage["user.id"];
 	}])
 	.controller("ResultsCtrl", [
 		"$scope",
@@ -149,28 +149,6 @@ angular.module("RealEstateCtrls", ["RealEstateServices", "flash"])
 
 			}
 	}])
-	.controller("PropertyCtrl", [
-		"$scope", 
-		"PropertyFactory",
-		function($scope, PropertyFactory) {
-			$scope.properties = [];
-			console.log("outside $scope.properties", $scope.properties);
-
-			PropertyFactory.query(function success(data) {
-				$scope.properties = data;
-				console.log("************** inside $scope.properties", $scope.properties)
-			}, function error(data) {
-				console.log("************** error", data);
-			});
-
-			$scope.deleteProperty = function(id, propertyIdx) {
-				Property.delete({id: id}, function success(data) {
-					$scope.properties.splice(propertyIdx, 1);
-				}, function error(data) {
-					console.log("************** $error", data);
-				});
-			}
-	}])
 	.controller("PropertyShowCtrl", [
 		"$scope",
 		"PropertyFactory",
@@ -190,7 +168,7 @@ angular.module("RealEstateCtrls", ["RealEstateServices", "flash"])
 				{"An investor wanted to buy your neighborhood": 9},
 				{"There's a shortage of housing supply": 8},
 				{"Boeing opens 3 more plants": 7},
-				{"good7": 6},
+				{"Population hit record level": 6},
 				{"a": 5},
 				{"a": 6},
 				{"a": 7},
@@ -222,16 +200,12 @@ angular.module("RealEstateCtrls", ["RealEstateServices", "flash"])
 				}								
 				if (index < 5) {
 					$scope.property.price = Math.round($scope.property.price - (($scope.property.price * singleEvent[key])/100));
-					console.log("price bad: ", $scope.property.price);
-					
+					console.log("price bad: ", $scope.property.price);					
 					Flash.create("success", key + " .Your house decreased by " + singleEvent[key] + "% .The new value of your house is: $" + $scope.property.price);
-					
-					// alert(key + " .Your house decreased by " + singleEvent[key] + "% .The new value of your house is: $" + $scope.property.price);
 				}
 				else {
 					$scope.property.price = Math.round($scope.property.price + (($scope.property.price * singleEvent[key]/100)));
 					Flash.create("success", key + " .Your house increased by " + singleEvent[key] + "% .The new value of your house is: $" + $scope.property.price);
-					// alert(key + " .Your house increased by " + singleEvent[key] + "% .The new value of your house is: $" + $scope.property.price);
 				}
 
 				PropertyFactory.update({id: $routeParams.id}, $scope.property)

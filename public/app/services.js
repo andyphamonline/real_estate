@@ -19,10 +19,7 @@ angular.module("RealEstateServices", ["ngResource"])
 	}])
 	.factory("Auth", ["$window", function($window) {
 		return {			
-			saveToken: function(token, user) {
-				if(!user){
-					return false;
-				}
+			saveToken: function(token, user) {				
 				$window.localStorage[TOKEN_STORAGE] = token;
 				$window.localStorage["user.id"] = user.id;
 				$window.localStorage["user.name"] = user.name;								

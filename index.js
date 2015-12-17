@@ -47,27 +47,6 @@ app.post('/api/auth', function(req, res) {
   });
 });
 
-app.get("/test", function(req, res) {
-  request(
-    'http://www.zillow.com/webservice/GetDeepComps.htm?zws-id=' + process.env.ZILLOW_KEY + '&zpid=48749425&count=20',
-    function(error, response, body) {
-      if (!error && response.statusCode === 200) {        
-        var parseString = require('xml2js').parseString;
-        var xml = body;
-        parseString(xml, function (err, result) {
-          if (error) {
-            console.log(error);
-          }
-                //res.send(result);
-                //console.log("*****************result: ", result);
-          data = result["Comps:comps"].response[0].properties[0].comparables[0].comp;
-          //console.log("*****************data at bottom of fn 2: ", data);
-          res.send(data);
-        });       
-      }
-    }
-  )
-})
 app.get('/*', function(req, res) {
   res.sendFile(path.join(__dirname, 'public/index.html'));
 });

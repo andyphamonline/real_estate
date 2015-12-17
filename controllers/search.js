@@ -17,14 +17,8 @@ router.get("/", function(req, res) {
 	        		parseString(xml, function (err, result) {
 	          			if (error) {
 	            			console.log(error);
-	          			}
-	          			console.log("*********** result: ", result);
-	          			console.log("*********** result['SearchResults:searchresults']: ", result["SearchResults:searchresults"]);
-	          			console.log("*********** result['SearchResults:searchresults'].response[0]: ", result["SearchResults:searchresults"].response[0]);
-	          			console.log("*********** result['SearchResults:searchresults'].response[0].results[0]: ", result['SearchResults:searchresults'].response[0].results[0]);
-	          			console.log("*********** result['SearchResults:searchresults'].response[0].results[0].result[0].zpid: ", result['SearchResults:searchresults'].response[0].results[0].result[0].zpid);
+	          			}	          			
 	          			data = result['SearchResults:searchresults'].response[0].results[0].result[0].zpid;
-
 	          			callback(null, data);
 	        		});       
 	      		}

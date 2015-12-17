@@ -6,10 +6,11 @@ angular.module("RealEstateCtrls", ["RealEstateServices", "flash"])
 		"Auth",
 		"$window",
 		"Flash",
-		function($scope, $http, $location, Auth, $window, Flash) {
-			// $scope.dangerAlert = function() {
-			// 	Flash.create("danger", "Incorrect email or password");
-			// }
+		"$rootScope",
+		function($scope, $http, $location, Auth, $window, Flash, $rootScope ) {
+			$scope.dangerAlert = function() {
+				Flash.create("danger", "Incorrect email or password");
+			}
 			$scope.user = {
 				email: "",
 				password: ""
@@ -17,8 +18,18 @@ angular.module("RealEstateCtrls", ["RealEstateServices", "flash"])
 
 			$scope.userAction = function() {
 				$http.post("/api/auth", $scope.user).then(function success(res) {
-					Auth.saveToken(res.data.token, res.data.user);					
-					$location.path("/users/" + $window.localStorage["user.id"])
+					console.log(res.data.message);
+					if (res.data.user){
+						Auth.saveToken(res.data.token, res.data.user);
+						$rootScope.name = res.data.user.name;
+						$rootScope.userId = res.data.user.id;
+						console.log("res.data in MainCtrl: ", res.data);
+						console.log("res.data.user in MainCtrl: ", res.data.user);
+						$location.path("/users/" + $window.localStorage["user.id"])						
+					}
+					else {
+						$scope.dangerAlert();
+					}
 				}, function error(res) {
 					console.log(res.data);
 				});
@@ -52,7 +63,8 @@ angular.module("RealEstateCtrls", ["RealEstateServices", "flash"])
 		"$http",
 		"$location",
 		"Auth",
-		function($scope, $http, $location, Auth) {
+		"$rootScope",
+		function($scope, $http, $location, Auth, $rootScope) {
 			$scope.user = {
 				name: "",
 				email: "",
@@ -63,7 +75,9 @@ angular.module("RealEstateCtrls", ["RealEstateServices", "flash"])
 				$http.post("/api/users", $scope.user).then(function success(res) {
 					$http.post("/api/auth", $scope.user).then(function success(res) {
 						Auth.saveToken(res.data.token, res.data.user);
-						$location.path("/users/" + window.localStorage["user.id"])
+						$rootScope.name = res.data.user.name;
+						$rootScope.userId = res.data.user.id;
+						$location.path("/users/" + window.localStorage["user.id"]);
 					}, function error(res) {
 						console.log(res.data);
 					});
@@ -81,6 +95,7 @@ angular.module("RealEstateCtrls", ["RealEstateServices", "flash"])
 		function($scope, Auth, $http, $location, $rootScope, $window) {
 		$scope.logout = function() {
 			Auth.removeToken();
+			$rootScope.user = null;
 			$location.path("/");
 		}
 		$scope.search = {
@@ -102,8 +117,16 @@ angular.module("RealEstateCtrls", ["RealEstateServices", "flash"])
 				console.log(res.data);
 			})
 		}
-		$scope.name = $window.localStorage["user.name"];
-		$scope.userId = $window.localStorage["user.id"];
+		if ( $rootScope.isLoggedIn() && $window.localStorage["user.name"] ){
+			$scope.name = $window.localStorage["user.name"];
+			$scope.userId = $window.localStorage["user.id"];
+		} else if ($rootScope.isLoggedIn()) {
+			$scope.name = $rootScope.user.name;
+			$scope.userId = $rootScope.user.id;
+			console.log($rootScope.user.name);
+		}
+		console.log("I am localStorage user.name: ", $window.localStorage["user.name"]);
+		console.log("I am $scope.name: ", $scope.name);
 	}])
 	.controller("ResultsCtrl", [
 		"$scope",

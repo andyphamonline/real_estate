@@ -1,4 +1,3 @@
-{{results}}
 
 <div class="row>">
 	<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
@@ -21,8 +20,8 @@
 				<label for="password">Password</label>
 				<input type="password" class="form-control" id="passwordIn" ng-model="user.password" placeholder="password">
 			</div>
-		
-			<button type="submit" class="btn btn-primary">Submit</button>
+			
+			<button type="submit" class="btn btn-primary" ng-click="dangerAlert(rightUser)">Submit</button>
 		</form>
 		
 	</div>

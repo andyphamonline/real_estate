@@ -1,11 +1,15 @@
-angular.module("RealEstateCtrls", ["RealEstateServices"])
+angular.module("RealEstateCtrls", ["RealEstateServices", "flash"])
 	.controller("MainCtrl", [
 		"$scope",
 		"$http",
 		"$location",
 		"Auth",
 		"$window",
-		function($scope, $http, $location, Auth, $window) {
+		"Flash",
+		function($scope, $http, $location, Auth, $window, Flash) {
+			$scope.dangerAlert = function() {
+				Flash.create("danger", "Incorrect email or password");
+			}
 			$scope.user = {
 				email: "",
 				password: ""

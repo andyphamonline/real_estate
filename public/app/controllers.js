@@ -82,7 +82,6 @@ angular.module("RealEstateCtrls", ["RealEstateServices", "flash"])
 		$scope.logout = function() {
 			Auth.removeToken();
 			$location.path("/");
-			console.log("logout");
 		}
 		$scope.search = {
 			q: ""

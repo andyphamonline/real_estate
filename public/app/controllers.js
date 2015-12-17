@@ -178,36 +178,60 @@ angular.module("RealEstateCtrls", ["RealEstateServices", "flash"])
 		"UserFactory",
 		"$location",
 		"$window",
-		function($scope, PropertyFactory, $routeParams, UserFactory, $location, $window) {
+		"Flash",
+		function($scope, PropertyFactory, $routeParams, UserFactory, $location, $window, Flash) {
 			eventArray = [
-				{"Carl moves to neighborhood": 5},
-				{"bad1": 3},
-				{"bad2": 4},
-				{"good1": 2},
-				{"good2": 4},
-				{"good3": 5},
-				{"good4": 6},
-				{"good5": 2},
-				{"good6": 3},
-				{"good7": 4},
-				{"good8": 5}
+				{"Carl moved to the neighborhood": 5},
+				{"Thomas moved next to your house": 6},
+				{"Crime rate went up in your area": 7},
+				{"Boeing moved to Texas": 8},
+				{"Your tenants destroyed your house": 9},
+				{"You upgraded your kitchen to granite": 10},
+				{"An investor wanted to buy your neighborhood": 9},
+				{"There's a shortage of housing supply": 8},
+				{"Boeing opens 3 more plants": 7},
+				{"good7": 6},
+				{"a": 5},
+				{"a": 6},
+				{"a": 7},
+				{"a": 8},
+				{"a": 9},
+				{"a": 10},
+				{"a": 9},
+				{"a": 8},
+				{"a": 7},
+				{"a": 6},
+				{"a": 5},
+				{"a": 6},
+				{"a": 7},
+				{"a": 8},
+				{"a": 9},
+				{"a": 10},
+				{"a": 9},
+				{"a": 8},
+				{"a": 7},
+				{"a": 6}								
 			]
 
 			$scope.property = PropertyFactory.get({id: $routeParams.id});
 
 			$scope.createEvent = function() {
-				var index = Math.floor(Math.random()*10);
+				var index = Math.floor(Math.random()*30);
 				var singleEvent = eventArray[index];
 				for (key in singleEvent) {
 				}								
-				if (index < 3) {
+				if (index < 5) {
 					$scope.property.price = Math.round($scope.property.price - (($scope.property.price * singleEvent[key])/100));
 					console.log("price bad: ", $scope.property.price);
-					alert(key + " .Your house decreased by " + singleEvent[key] + "% .The new value of your house is: $" + $scope.property.price);
+					
+					Flash.create("success", key + " .Your house decreased by " + singleEvent[key] + "% .The new value of your house is: $" + $scope.property.price);
+					
+					// alert(key + " .Your house decreased by " + singleEvent[key] + "% .The new value of your house is: $" + $scope.property.price);
 				}
 				else {
 					$scope.property.price = Math.round($scope.property.price + (($scope.property.price * singleEvent[key]/100)));
-					alert(key + " .Your house increased by " + singleEvent[key] + "% .The new value of your house is: $" + $scope.property.price);
+					Flash.create("success", key + " .Your house increased by " + singleEvent[key] + "% .The new value of your house is: $" + $scope.property.price);
+					// alert(key + " .Your house increased by " + singleEvent[key] + "% .The new value of your house is: $" + $scope.property.price);
 				}
 
 				PropertyFactory.update({id: $routeParams.id}, $scope.property)

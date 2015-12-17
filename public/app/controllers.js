@@ -25,8 +25,8 @@ angular.module("RealEstateCtrls", ["RealEstateServices", "flash"])
 			}
 	}])
 	.controller("UserCtrl", [
-		"$scope", "UserFactory", "$routeParams", "PropertyFactory", "UserProperty",
-		function($scope, UserFactory, $routeParams, PropertyFactory, UserProperty) {
+		"$scope", "UserFactory", "$routeParams", "UserProperty",
+		function($scope, UserFactory, $routeParams, UserProperty) {
 			UserFactory.get({id: $routeParams.id}, function(data) {				
 				$scope.user = data
 			}, function(data) {
@@ -34,6 +34,12 @@ angular.module("RealEstateCtrls", ["RealEstateServices", "flash"])
 			})
 
 			$scope.properties = [];
+
+			UserFactory.query(function(data) {
+				$scope.users = data;				
+			}, function(data) {
+				console.log(data);
+			})
 
 			UserProperty.get({id: $routeParams.id}, function success(data) {
 				$scope.properties = data;
@@ -70,10 +76,9 @@ angular.module("RealEstateCtrls", ["RealEstateServices", "flash"])
 		"Auth",
 		"$http",
 		"$location", 
-		"PropertyFactory",
 		"$rootScope",
 		"$window",
-		function($scope, Auth, $http, $location, PropertyFactory, $rootScope, $window) {
+		function($scope, Auth, $http, $location, $rootScope, $window) {
 		$scope.logout = function() {
 			Auth.removeToken();
 			$location.path("/");

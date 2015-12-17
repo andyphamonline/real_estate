@@ -17,6 +17,9 @@ angular.module("RealEstateServices", ["ngResource"])
 	.factory("UserFactory", ["$resource", function($resource) {
 		return $resource("/api/users/:id", null, {"update": {method: "PUT"}});
 	}])
+	// .factory("AllUsersFactory", ["$resource", function($resource) {
+	// 	return $resource("/api/users", null, {"update": {method: "PUT"}});
+	// }])
 	.factory("Auth", ["$window", function($window) {
 		return {			
 			saveToken: function(token, user) {				

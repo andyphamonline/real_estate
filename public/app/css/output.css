@@ -1,3 +1,6 @@
+@import url(https://fonts.googleapis.com/css?family=Orbitron:900);
+@import url(https://fonts.googleapis.com/css?family=Cookie);
+@import url(https://fonts.googleapis.com/css?family=Cinzel);
 * {
   margin: 0;
   padding: 0;
@@ -12,7 +15,25 @@
 
 body {
   background: url("../images/house_2000.jpeg");
-  font-size: 12px;
+  font-family: "Cookie", cursive;
+  font-size: 20px;
   text-align: center; }
+
+button {
+  color: #5387E8; }
+
+h1 {
+  color: #5387E8;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 3em; }
+
+nav b {
+  color: #5387E8;
+  font-size: 1.5em; }
+
+.mainPage h3 {
+  color: #5387E8;
+  font-family: 'Cinzel', serif;
+  font-size: 2em; }
 
 /*# sourceMappingURL=output.css.map */

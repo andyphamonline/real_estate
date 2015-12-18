@@ -12,7 +12,8 @@ router.route('/')
   })
   .post(function(req, res) {
     User.create(req.body, function(err, user) {
-      if (err) return res.status(500).send(err);
+      if (err) return res.status(500).send({error: err, message:"HELLLOOOOO"});
+      console.log("api/users post: ", user);
       res.send(user);
     });
   });

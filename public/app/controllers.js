@@ -63,23 +63,32 @@ angular.module("RealEstateCtrls", ["RealEstateServices", "flash"])
 		"$location",
 		"Auth",
 		"$rootScope",
-		function($scope, $http, $location, Auth, $rootScope) {
+		"Flash",
+		function($scope, $http, $location, Auth, $rootScope, Flash) {
 			$scope.user = {
 				name: "",
 				email: "",
 				password: "",
 				cash: 1000000
 			};
+
+			$scope.dangerAlert = function() {
+				Flash.create("danger", "User already existed");
+			}
+
 			$scope.userAction = function() {
 				$http.post("/api/users", $scope.user).then(function success(res) {
-					$http.post("/api/auth", $scope.user).then(function success(res) {
-						Auth.saveToken(res.data.token, res.data.user);
-						$rootScope.name = res.data.user.name;
-						$rootScope.userId = res.data.user.id;
-						$location.path("/users/" + window.localStorage["user.id"]);
+					$http.post("/api/auth", $scope.user).then(function success(res) {				
+							Auth.saveToken(res.data.token, res.data.user);
+							$rootScope.name = res.data.user.name;
+							$rootScope.userId = res.data.user.id;
+							$location.path("/users/" + window.localStorage["user.id"]);
 					}, function error(res) {
-						console.log(res.data);
+						console.log(res);
 					});
+				}, function error(res) {
+					console.log(res);
+					$scope.dangerAlert();
 				})
 			}
 		}

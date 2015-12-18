@@ -1,20 +1,17 @@
 <h1>Property Detail</h1>
 
-<div class="propertyShow row">
-	<div class="col-xs-5 col-xs-offset-1 col-sm-5 col-sm-offset-1 col-md-5 col-md-offset-1 col-lg-5 col-lg-offset-1">
+<div class="propertyShow">
+	
 		<p>Address: <b>{{property.address}}</b></p>
 		<p>City & State: <b>{{property.city}}</b>, <b>{{property.state}}</b> <b>{{property.zip}}</b> </p>
 		<p>Price: <b>${{property.price}}</b></p>
-		<p>Year Built: <b>{{property.yearBuilt}}</b></p>
-	</div>
-	<div class="col-xs-5 col-xs-offset-1 col-sm-5 col-sm-offset-1 col-md-5 col-md-offset-1 col-lg-5 col-lg-offset-1">
+		<p>Year Built: <b>{{property.yearBuilt}}</b></p>	
 		<p>Lot Size: <b>{{property.lotSize}}</b></p>
 		<p>Bedrooms: <b>{{property.bedrooms}}</b></p>
 		<p>Bathrooms: <b>{{property.bathrooms}}</b></p>
 		<p>Last sold price: <b>${{property.lastSoldPrice}}</b></p>
-	</div>
-	<div class="row">
+	
 		<button ng-click="createEvent()" class="btn btn-primary">Fast forward 1 month</button>
 		<button ng-click="deleteProperty()" class="btn btn-danger">Sell this property</button>
-	</div>
+	
 </div>

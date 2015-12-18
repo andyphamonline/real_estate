@@ -204,10 +204,10 @@ angular.module("RealEstateCtrls", ["RealEstateServices", "flash"])
 				{"There's a shortage of housing supply": 8},
 				{"Boeing opens 3 more plants": 7},
 				{"Population hit record level": 6},
-				{"a": 5},
-				{"a": 6},
-				{"a": 7},
-				{"a": 8},
+				{"Fed dropped interest rate to 0": 5},
+				{"Disneyland park added to your neighborhood ": 6},
+				{"Batman bought a house in your area": 7},
+				{"Netflix moved their headquater": 8},
 				{"a": 9},
 				{"a": 10},
 				{"a": 9},
@@ -215,15 +215,7 @@ angular.module("RealEstateCtrls", ["RealEstateServices", "flash"])
 				{"a": 7},
 				{"a": 6},
 				{"a": 5},
-				{"a": 6},
-				{"a": 7},
-				{"a": 8},
-				{"a": 9},
-				{"a": 10},
-				{"a": 9},
-				{"a": 8},
-				{"a": 7},
-				{"a": 6}								
+				{"a": 6},							
 			]
 
 			$scope.property = PropertyFactory.get({id: $routeParams.id});

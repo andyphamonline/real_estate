@@ -1,36 +1,37 @@
 <h1>{{user.name}}'s Profile</h1>
+
 <div class="userWrapper">
-<div class="user row">
-	<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-		<h2>Information</h2>
-		<div class="userInfo">
+	<div class="user row">
+		<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+			<h2>Information</h2>
+			<div class="userInfo">
+				<p>Name: <b>{{user.name}}</b></p>
+				<p>Email: <b>{{user.email}}</b></p>
+				<p>Cash: <b>${{user.cash}}</b></p>
+			</div>
+		</div>
+		<div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
+			<h2>Manage your properties</h2>
+
+			<div class="userManage col-xs-3 col-xs-offset-1 col-sm-3 col-sm-offset-1 col-md-3 col-md-offset-1 col-lg-3 col-lg-offset-1" ng-repeat="property in properties">
+				<p>Address: <b>{{property.address}}</b></p>
+				<p>City,State,Zip: <b>{{property.city}}</b>, <b>{{property.state}}</b> <b>{{property.zip}}</b></p>
+				<p>Price: <b>${{property.price}}</b></p>
+				<a href="properties/{{property.id}}" class="btn btn-primary">Go to this property</a>
+			</div>
+		</div>
+	</div>
+
+	<div class="user row">
+		
+		<h2>Ranking</h2>
+		<div class="userRank" ng-if="users.length" ng-repeat="user in users | orderBy: '-cash' track by $index">
+			<p>Place: <b>{{$index + 1}}</b></p>
 			<p>Name: <b>{{user.name}}</b></p>
-			<p>Email: <b>{{user.email}}</b></p>
 			<p>Cash: <b>${{user.cash}}</b></p>
 		</div>
-	</div>
-	<div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
-		<h2>Manage your properties</h2>
 
-		<div class="userManage col-xs-3 col-xs-offset-1 col-sm-3 col-sm-offset-1 col-md-3 col-md-offset-1 col-lg-3 col-lg-offset-1" ng-repeat="property in properties">
-			<p>Address: <b>{{property.address}}</b></p>
-			<p>City,State,Zip: <b>{{property.city}}</b>, <b>{{property.state}}</b> <b>{{property.zip}}</b></p>
-			<p>Price: <b>${{property.price}}</b></p>
-			<a href="properties/{{property.id}}" class="btn btn-primary">Go to this property</a>
-		</div>
 	</div>
-</div>
-
-<div class="user row">
-	
-	<h2>Ranking</h2>
-	<div class="userRank" ng-if="users.length" ng-repeat="user in users | orderBy: '-cash' track by $index">
-		<p>Place: <b>{{$index + 1}}</b></p>
-		<p>Name: <b>{{user.name}}</b></p>
-		<p>Cash: <b>${{user.cash}}</b></p>
-	</div>
-
-</div>
 </div>
 
 

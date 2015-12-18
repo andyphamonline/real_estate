@@ -1,5 +1,7 @@
 #Real Estate Game
 
+In Real Estate game, user can sign up and log in to play and learn about investing in the housing market. User buys, sells and creates good or bad event for the house. The profile page shows the current ranking of all players.
+
 ###User Story
 Andy creates a profile using his facebook account. The account starts with $500k. He searches for a house in Seattle from $200k-$300k. He finds 20 houses. He buys $250k house. Boeing opens 3 more plants so his house price goes up to $300k. He sells his house and buy another one.
 
@@ -12,7 +14,9 @@ Node
 Express
 Sweet Alert
 Google Font
+Animate CSS
 
-###Extra Feature
-Cloudinary
-Facebook OAuth: Research Angular Directive
+###Issues
+Name on nav bar needs to be reloaded. 
+User cash on profile page doesn't always up-to-date if not refresh.
+

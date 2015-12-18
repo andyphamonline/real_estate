@@ -1,6 +1,7 @@
 @import url(https://fonts.googleapis.com/css?family=Orbitron:900);
 @import url(https://fonts.googleapis.com/css?family=Cookie);
 @import url(https://fonts.googleapis.com/css?family=Cinzel);
+@import url(https://fonts.googleapis.com/css?family=Josefin+Sans);
 
 * { margin:0; padding:0; box-sizing:border-box; }
 
@@ -14,7 +15,7 @@
 
 body {
 	background: url("../images/house_2000.jpeg");
-	font-family: "Cookie", cursive;
+	font-family: 'Josefin Sans', sans-serif;
 	font-size: 20px;
 	text-align: center;
 }
@@ -29,25 +30,125 @@ h1 {
 	font-size: 3em;
 }
 
+h2 {
+	color: #5387E8;
+	font-family: "Cookie", cursive;
+	font-size: 3em;
+}
+
+h3 {
+	color: #5387E8;
+	font-family: "Cookie", cursive;
+	font-size: 2em;
+}
+
+
 // navbar.html
+
+$bgDefault      : #009A0E;
+$bgHighlight    : black;
+$colDefault     : #ecf0f1;
+$colHighlight   : #ffbbbc;
+.navbar-default {
+  background-color: black;
+  border-color: FFFFE2;
+  .navbar-brand {
+    color: $colDefault;
+    &:hover, &:focus { 
+      color: $colHighlight; }}
+  .navbar-text {
+    color: $colDefault; }
+  .navbar-nav {
+    > li {
+      > a {
+        color: $colDefault;
+        &:hover,  &:focus {
+          color: $colHighlight; }}}
+    > .active {
+      > a, > a:hover, > a:focus {
+        color: #ECF0F1;
+        background-color: $bgHighlight; }}
+    > .open {
+      > a, > a:hover, > a:focus {
+        color: $colHighlight;
+        background-color: $bgHighlight; }}}
+  .navbar-toggle {
+    border-color: $bgHighlight;
+    &:hover, &:focus {
+      background-color: $bgHighlight; }
+    .icon-bar {
+      background-color: $colDefault; }}
+  .navbar-collapse,
+  .navbar-form {
+    border-color: $colDefault; }
+  .navbar-link {
+    color: $colDefault;
+    &:hover {
+      color: $colHighlight; }}}
+@media (max-width: 767px) {
+  .navbar-default .navbar-nav .open .dropdown-menu {
+    > li > a {
+      color: $colDefault;
+      &:hover, &:focus {
+        color: $colHighlight; }}
+    > .active {
+      > a, > a:hover, > a:focus, {
+        color: $colHighlight;
+        background-color: $bgHighlight; }}}
+}
+
 nav {
 	b {
 		color: #5387E8;
-		font-size: 1.5em;
+		font-size: 1.3em;
 	}
+
+	input {
+		width: 10em;
+	}
+
 }
 
 //main.html
-.mainPage {
-	h3 {
-		color: #5387E8;
-		font-family: 'Cinzel', serif;
-		font-size: 2em;
+.mainPage {	
+	img {
+		-webkit-transition: height 2s; /* For Safari 3.1 to 6.0 */
+    	transition: height 2s;
+  		height: 18em;
 	}
+
+	img:hover {
+		height: 19em;
+	}
+	.mainLeft {
+		background-color: rgba(255, 255, 255, .35);
+	}	
 }
 
+//user.html
+.user div b{
+	font-size: 1.2em;
+}
 
+.userManage, .userRank, .userInfo {
+	border: 1px black solid;
+	border-radius: 2em;
+	padding: .3em;
+	margin-bottom: .5em;
+}
 
+.userRank {
+	display: inline-block;
+	margin: 0 .3em;
+	margin-bottom: .5em
+}
+
+.userWrapper {
+	background-color: rgba(255, 255, 255, .35);
+	border-radius: 2em;
+	padding: .5em;
+	margin: 2em;
+}
 
 
 

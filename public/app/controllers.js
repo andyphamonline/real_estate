@@ -37,14 +37,16 @@ angular.module("RealEstateCtrls", ["RealEstateServices", "flash"])
 		function($scope, UserFactory, $routeParams, UserProperty) {
 			UserFactory.get({id: $routeParams.id}, function(data) {				
 				$scope.user = data
-			}, function(data) {
-				console.log(data)
+				console.log($scope.user);
 			})
 
 			$scope.properties = [];
+			
+			$scope.users = [];
 
 			UserFactory.query(function(data) {
-				$scope.users = data;				
+				$scope.users = data;		
+				console.log($scope.users);
 			}, function(data) {
 				console.log(data);
 			})
@@ -164,7 +166,7 @@ angular.module("RealEstateCtrls", ["RealEstateServices", "flash"])
 					user: $window.localStorage["user.id"]
 				};
 				
-				// get user cash from DB
+				// update user cash in DB
 				UserFactory.get({id: $window.localStorage["user.id"]}).$promise.then(function(result){
 					if (result.cash > $scope.property.price) {
 						result.cash = result.cash - $scope.property.price
@@ -247,9 +249,10 @@ angular.module("RealEstateCtrls", ["RealEstateServices", "flash"])
 			$scope.properties = [];
 
 			$scope.deleteProperty = function(id, propertyIdx) {
+				//add property sold price to user cash
 				UserFactory.get({id: $window.localStorage["user.id"]}).$promise.then(function(result){				
 					result.cash = result.cash + $scope.property.price;
-					UserFactory.update({id: $window.localStorage["user.id"]}, {cash: result.cash});								
+					UserFactory.update({id: $window.localStorage["user.id"]}, {cash: result.cash});						
 				});
 
 				PropertyFactory.delete({id: $routeParams.id}, function success(data) {

@@ -1,6 +1,7 @@
 @import url(https://fonts.googleapis.com/css?family=Orbitron:900);
 @import url(https://fonts.googleapis.com/css?family=Cookie);
 @import url(https://fonts.googleapis.com/css?family=Cinzel);
+@import url(https://fonts.googleapis.com/css?family=Josefin+Sans);
 * {
   margin: 0;
   padding: 0;
@@ -15,7 +16,7 @@
 
 body {
   background: url("../images/house_2000.jpeg");
-  font-family: "Cookie", cursive;
+  font-family: 'Josefin Sans', sans-serif;
   font-size: 20px;
   text-align: center; }
 
@@ -27,13 +28,91 @@ h1 {
   font-family: 'Orbitron', sans-serif;
   font-size: 3em; }
 
+h2 {
+  color: #5387E8;
+  font-family: "Cookie", cursive;
+  font-size: 3em; }
+
+h3 {
+  color: #5387E8;
+  font-family: "Cookie", cursive;
+  font-size: 2em; }
+
+.navbar-default {
+  background-color: black;
+  border-color: FFFFE2; }
+  .navbar-default .navbar-brand {
+    color: #ecf0f1; }
+    .navbar-default .navbar-brand:hover, .navbar-default .navbar-brand:focus {
+      color: #ffbbbc; }
+  .navbar-default .navbar-text {
+    color: #ecf0f1; }
+  .navbar-default .navbar-nav > li > a {
+    color: #ecf0f1; }
+    .navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus {
+      color: #ffbbbc; }
+  .navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:hover, .navbar-default .navbar-nav > .active > a:focus {
+    color: #ECF0F1;
+    background-color: black; }
+  .navbar-default .navbar-nav > .open > a, .navbar-default .navbar-nav > .open > a:hover, .navbar-default .navbar-nav > .open > a:focus {
+    color: #ffbbbc;
+    background-color: black; }
+  .navbar-default .navbar-toggle {
+    border-color: black; }
+    .navbar-default .navbar-toggle:hover, .navbar-default .navbar-toggle:focus {
+      background-color: black; }
+    .navbar-default .navbar-toggle .icon-bar {
+      background-color: #ecf0f1; }
+  .navbar-default .navbar-collapse,
+  .navbar-default .navbar-form {
+    border-color: #ecf0f1; }
+  .navbar-default .navbar-link {
+    color: #ecf0f1; }
+    .navbar-default .navbar-link:hover {
+      color: #ffbbbc; }
+
+@media (max-width: 767px) {
+  .navbar-default .navbar-nav .open .dropdown-menu > li > a {
+    color: #ecf0f1; }
+    .navbar-default .navbar-nav .open .dropdown-menu > li > a:hover, .navbar-default .navbar-nav .open .dropdown-menu > li > a:focus {
+      color: #ffbbbc; }
+  .navbar-default .navbar-nav .open .dropdown-menu > .active > a, .navbar-default .navbar-nav .open .dropdown-menu > .active > a:hover, .navbar-default .navbar-nav .open .dropdown-menu > .active > a:focus {
+    color: #ffbbbc;
+    background-color: black; } }
 nav b {
   color: #5387E8;
-  font-size: 1.5em; }
+  font-size: 1.3em; }
+nav input {
+  width: 10em; }
 
-.mainPage h3 {
-  color: #5387E8;
-  font-family: 'Cinzel', serif;
-  font-size: 2em; }
+.mainPage img {
+  -webkit-transition: height 2s;
+  /* For Safari 3.1 to 6.0 */
+  transition: height 2s;
+  height: 18em; }
+.mainPage img:hover {
+  height: 19em; }
+.mainPage .mainLeft {
+  background-color: rgba(255, 255, 255, 0.35); }
+
+.user div b {
+  font-size: 1.2em; }
+
+.userManage, .userRank, .userInfo {
+  border: 1px black solid;
+  border-radius: 2em;
+  padding: .3em;
+  margin-bottom: .5em; }
+
+.userRank {
+  display: inline-block;
+  margin: 0 .3em;
+  margin-bottom: 0.5em; }
+
+.userWrapper {
+  background-color: rgba(255, 255, 255, 0.35);
+  border-radius: 2em;
+  padding: .5em;
+  margin: 2em; }
 
 /*# sourceMappingURL=output.css.map */

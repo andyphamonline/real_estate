@@ -21,6 +21,7 @@ router.route('/')
 router.route('/:id').get(function(req, res) {
   User.findById(req.params.id, function(err, user) {
     if (err) return res.status(500).send(err);
+    console.log(user);
     res.send(user);
   })
   router.put("/:id", function(req, res) {

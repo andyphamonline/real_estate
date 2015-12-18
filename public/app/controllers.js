@@ -22,7 +22,8 @@ angular.module("RealEstateCtrls", ["RealEstateServices", "flash"])
 						Auth.saveToken(res.data.token, res.data.user);
 						$rootScope.name = res.data.user.name;
 						$rootScope.userId = res.data.user.id;						
-						$location.path("/users/" + $window.localStorage["user.id"])						
+						// $location.path("/users/" + $window.localStorage["user.id"]);
+						$location.path("/users/" + res.data.user.id);
 					}
 					else {
 						$scope.dangerAlert();
@@ -82,7 +83,8 @@ angular.module("RealEstateCtrls", ["RealEstateServices", "flash"])
 							Auth.saveToken(res.data.token, res.data.user);
 							$rootScope.name = res.data.user.name;
 							$rootScope.userId = res.data.user.id;
-							$location.path("/users/" + window.localStorage["user.id"]);
+							// $location.path("/users/" + window.localStorage["user.id"]);
+							$location.path("/users/" + res.data.user.id);
 					}, function error(res) {
 						console.log(res);
 					});
@@ -124,7 +126,7 @@ angular.module("RealEstateCtrls", ["RealEstateServices", "flash"])
 				})
 				.then(function success(res) {
 					if (res.data.length === 0) {						
-						$scope.dangerAlert();						
+						$scope.dangerAlert();				
 					}
 					else {						
 						$rootScope.searchResults = res;

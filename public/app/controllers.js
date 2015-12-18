@@ -205,6 +205,7 @@ angular.module("RealEstateCtrls", ["RealEstateServices", "flash"])
 			eventArray = [
 				{"Carl moved to the neighborhood": 5},
 				{"Thomas moved next to your house": 6},
+				{"Amazon moved to Texas": 10},
 				{"Crime rate went up in your area": 7},
 				{"Boeing moved to Texas": 8},
 				{"Your tenants destroyed your house": 9},
@@ -214,17 +215,16 @@ angular.module("RealEstateCtrls", ["RealEstateServices", "flash"])
 				{"Boeing opens 3 more plants": 7},
 				{"Population hit record level": 6},
 				{"Fed dropped interest rate to 0": 5},
-				{"Disneyland park added to your neighborhood ": 6},
+				{"Disneyland opened a park in your neighborhood ": 6},
 				{"Batman bought a house in your area": 7},
 				{"Netflix moved their headquater": 8},
-				{"a": 9},
-				{"a": 10},
-				{"a": 9},
-				{"a": 8},
-				{"a": 7},
-				{"a": 6},
-				{"a": 5},
-				{"a": 6},							
+				{"Queen Elizabeth moved to Seattle": 9},
+				{"Seattle Seahawks built a stadium in your area": 9},
+				{"Your spouse upgraded the roof": 8},
+				{"You built an extra bedroom": 7},
+				{"You added a solar-powered water heater": 6},
+				{"You painted your house": 5},
+				{"You cleaned your house the 1st time in 3 years": 6}							
 			]
 
 			$scope.property = PropertyFactory.get({id: $routeParams.id});
@@ -234,7 +234,7 @@ angular.module("RealEstateCtrls", ["RealEstateServices", "flash"])
 				var singleEvent = eventArray[index];
 				for (key in singleEvent) {
 				}								
-				if (index < 5) {
+				if (index < 6) {
 					$scope.property.price = Math.round($scope.property.price - (($scope.property.price * singleEvent[key])/100));
 					console.log("price bad: ", $scope.property.price);					
 					Flash.create("success", key + " .Your house decreased by " + singleEvent[key] + "% .The new value of your house is: $" + $scope.property.price);

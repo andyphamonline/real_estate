@@ -221,7 +221,7 @@ angular.module("RealEstateCtrls", ["RealEstateServices", "flash"])
 			$scope.property = PropertyFactory.get({id: $routeParams.id});
 
 			$scope.createEvent = function() {
-				var index = Math.floor(Math.random()*30);
+				var index = Math.floor(Math.random()*eventArray.length);
 				var singleEvent = eventArray[index];
 				for (key in singleEvent) {
 				}								

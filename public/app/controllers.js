@@ -126,7 +126,7 @@ angular.module("RealEstateCtrls", ["RealEstateServices", "flash"])
 				})
 				.then(function success(res) {
 					if (res.data.length === 0) {						
-						$scope.dangerAlert();				
+						$scope.dangerAlert();						
 					}
 					else {						
 						$rootScope.searchResults = res;

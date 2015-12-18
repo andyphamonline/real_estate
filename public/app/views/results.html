@@ -1,6 +1,6 @@
-<h1>Search Results</h1>
+<h1 class="animated zoomIn">Search Results</h1>
 
-<div class="results col-xs-4 col-xs-offset-1 col-sm-4 col-sm-offset-1 col-md-4 col-md-offset-1 col-lg-4 col-lg-offset-1" ng-repeat="result in results">
+<div class="animated fadeIn results col-xs-4 col-xs-offset-1 col-sm-4 col-sm-offset-1 col-md-4 col-md-offset-1 col-lg-4 col-lg-offset-1" ng-repeat="result in results">
 	<div class="row">
 		<div class="col-xs-5 col-xs-offset-1 col-sm-5 col-sm-offset-1 col-md-5 col-md-offset-1 col-lg-5 col-lg-offset-1">
 			<p>Address: </p><p><b>{{result.address[0].street[0]}}</b>, <b>{{result.address[0].city[0]}}</b>, <b>{{result.address[0].state[0]}}</b> <b>{{result.address[0].zipcode[0]}}</b></p>

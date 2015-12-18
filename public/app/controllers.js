@@ -22,7 +22,7 @@ angular.module("RealEstateCtrls", ["RealEstateServices", "flash"])
 						Auth.saveToken(res.data.token, res.data.user);
 						$rootScope.name = res.data.user.name;
 						$rootScope.userId = res.data.user.id;						
-						$location.path("/users/" + $window.localStorage["user.id"])						
+						$location.path("/users/" + res.data.user.id)						
 					}
 					else {
 						$scope.dangerAlert();
@@ -82,7 +82,9 @@ angular.module("RealEstateCtrls", ["RealEstateServices", "flash"])
 							Auth.saveToken(res.data.token, res.data.user);
 							$rootScope.name = res.data.user.name;
 							$rootScope.userId = res.data.user.id;
-							$location.path("/users/" + window.localStorage["user.id"]);
+							console.log("This is from node: ",res.data.user.id);
+							console.log("This is local storage: ",window.localStorage["user.id"]);
+							$location.path("/users/" + res.data.user.id);
 					}, function error(res) {
 						console.log(res);
 					});
@@ -137,13 +139,13 @@ angular.module("RealEstateCtrls", ["RealEstateServices", "flash"])
 			}
 
 			//check if $rootScope & login
-			if ( $rootScope.isLoggedIn() && $window.localStorage["user.name"] ) {
-				$scope.name = $window.localStorage["user.name"];
-				$scope.userId = $window.localStorage["user.id"];
-			} else if ($rootScope.isLoggedIn()) {
-				$scope.name = $rootScope.user.name;
-				$scope.userId = $rootScope.user.id;
-			}
+			// if ( $rootScope.isLoggedIn() && $window.localStorage["user.name"] ) {
+			// 	$scope.name = $window.localStorage["user.name"];
+			// 	$scope.userId = $window.localStorage["user.id"];
+			// } else if ($rootScope.isLoggedIn()) {
+			// 	$scope.name = $rootScope.user.name;
+			// 	$scope.userId = $rootScope.user.id;
+			// }
 	}])
 	.controller("ResultsCtrl", [
 		"$scope",

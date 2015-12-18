@@ -43,14 +43,21 @@ h2, legend {
 	color: #3373E8;
 	font-family: "Cookie", cursive;
 	font-size: 3em;
+	margin: 0px;
 }
 
 h3, label {
 	color: #3373E8;
 	font-family: "Cookie", cursive;
 	font-size: 1.5em;
+	margin: 0px;
 }
 
+#indexFlash {
+	min-height: 40px; 
+	max-width: 80%;
+	margin: auto;
+}
 
 // navbar.html
 
@@ -58,6 +65,7 @@ $bgDefault      : #009A0E;
 $bgHighlight    : black;
 $colDefault     : #ecf0f1;
 $colHighlight   : #ffbbbc;
+
 .navbar-default {
   background-color: black;
   border-color: black;
@@ -104,6 +112,10 @@ $colHighlight   : #ffbbbc;
       > a, > a:hover, > a:focus, {
         color: $colHighlight;
         background-color: $bgHighlight; }}}
+}
+
+.navbar {
+	margin-bottom: 0px;
 }
 
 nav {

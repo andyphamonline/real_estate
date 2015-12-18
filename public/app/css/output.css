@@ -39,12 +39,19 @@ h1 {
 h2, legend {
   color: #3373E8;
   font-family: "Cookie", cursive;
-  font-size: 3em; }
+  font-size: 3em;
+  margin: 0px; }
 
 h3, label {
   color: #3373E8;
   font-family: "Cookie", cursive;
-  font-size: 1.5em; }
+  font-size: 1.5em;
+  margin: 0px; }
+
+#indexFlash {
+  min-height: 40px;
+  max-width: 80%;
+  margin: auto; }
 
 .navbar-default {
   background-color: black;
@@ -87,6 +94,9 @@ h3, label {
   .navbar-default .navbar-nav .open .dropdown-menu > .active > a, .navbar-default .navbar-nav .open .dropdown-menu > .active > a:hover, .navbar-default .navbar-nav .open .dropdown-menu > .active > a:focus {
     color: #ffbbbc;
     background-color: black; } }
+.navbar {
+  margin-bottom: 0px; }
+
 nav b {
   color: #5387E8;
   font-size: 1.3em; }

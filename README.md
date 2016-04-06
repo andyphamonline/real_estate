@@ -8,13 +8,20 @@ Andy creates a profile using his facebook account. The account starts with $500k
 Carl login & searches for a house in Seattle from $400K-$500k. He clicks on "buy a house" button. Thomas moves to his neighborhood so his house values goes down by $30k. He sells his house and loses money.
 
 ###Technologies used
-MongoDB
-AngularJS
-Node
-Express
-Sweet Alert
-Google Font
-Animate CSS
+* `MongoDB`
+* `AngularJS`
+* `Node`
+* `Express`
+* `Zillow API`
+* `Sweet Alert`
+* `Google Font`
+* `Animate CSS`
+* `jQuery`
+* `Google Font`
+* `Bootstrap`
+* `HTML5`
+* `CSS3`
+* `Javascript`
 
 ###Issues
 Name on nav bar needs to be reloaded. 

@@ -27,3 +27,4 @@ Carl login & searches for a house in Seattle from $400K-$500k. He clicks on "buy
 Name on nav bar needs to be reloaded. 
 User cash on profile page doesn't always up-to-date if not refresh.
 
+
